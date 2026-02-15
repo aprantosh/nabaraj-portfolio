@@ -1,0 +1,54 @@
+// Typing Effect
+const text = ["Java • Spring Boot • Kafka", 
+              "Cloud • Microservices • AWS",
+              "Enterprise Backend Engineer"];
+
+let i = 0;
+let j = 0;
+let currentText = "";
+let isDeleting = false;
+
+function type() {
+  const typingElement = document.querySelector(".typing");
+
+  if (i < text.length) {
+    if (!isDeleting && j <= text[i].length) {
+      currentText = text[i].substring(0, j++);
+    } else if (isDeleting && j >= 0) {
+      currentText = text[i].substring(0, j--);
+    }
+
+    typingElement.innerHTML = currentText;
+
+    if (j === text[i].length) isDeleting = true;
+    if (j === 0) {
+      isDeleting = false;
+      i = (i + 1) % text.length;
+    }
+  }
+
+  setTimeout(type, 100);
+}
+
+type();
+
+// Scroll Reveal
+window.addEventListener("scroll", function () {
+  document.querySelectorAll(".reveal").forEach(el => {
+    const windowHeight = window.innerHeight;
+    const elementTop = el.getBoundingClientRect().top;
+    if (elementTop < windowHeight - 100) {
+      el.classList.add("active");
+    }
+  });
+});
+
+// Particles
+particlesJS("particles-js", {
+  particles: {
+    number: { value: 80 },
+    size: { value: 3 },
+    move: { speed: 1 },
+    line_linked: { enable: true }
+  }
+});
