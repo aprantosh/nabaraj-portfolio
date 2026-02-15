@@ -129,3 +129,46 @@ nav a {
   opacity: 1;
   transform: translateY(0);
 }
+.skill {
+  margin: 20px 0;
+  text-align: left;
+}
+
+.bar {
+  height: 8px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  width: 0;
+  background: #2563eb;
+  transition: width 2s ease;
+}
+
+.progress.java { width: 95%; }
+.progress.micro { width: 90%; }
+.progress.aws { width: 85%; }
+.timeline {
+  border-left: 2px solid #2563eb;
+  padding-left: 20px;
+  margin-top: 40px;
+}
+
+.timeline-item {
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -11px;
+  top: 5px;
+  width: 15px;
+  height: 15px;
+  background: #2563eb;
+  border-radius: 50%;
+}

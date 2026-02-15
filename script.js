@@ -52,3 +52,18 @@ particlesJS("particles-js", {
     line_linked: { enable: true }
   }
 });
+fetch("https://api.github.com/users/aprantosh/repos")
+  .then(response => response.json())
+  .then(data => {
+    const container = document.getElementById("github-projects");
+    data.slice(0, 4).forEach(repo => {
+      const div = document.createElement("div");
+      div.classList.add("card");
+      div.innerHTML = `
+        <h3>${repo.name}</h3>
+        <p>${repo.description || "No description available"}</p>
+        <a href="${repo.html_url}" target="_blank">View Repository</a>
+      `;
+      container.appendChild(div);
+    });
+  });
