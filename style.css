@@ -612,3 +612,20 @@ body{
     height: 280px;
   }
 }
+/* FIX: chat opened as display:flex, force vertical layout */
+#chat-container.chat{
+  display: flex;              /* safe */
+  flex-direction: column;     /* IMPORTANT */
+}
+
+/* Let messages take the space */
+#chat-container .chat-messages{
+  flex: 1 1 auto;
+  height: auto;               /* override fixed height if needed */
+  min-height: 260px;          /* keeps input visible */
+}
+
+/* Keep input visible at bottom */
+#chat-container .chat-input{
+  flex: 0 0 auto;
+}
