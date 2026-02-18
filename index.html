@@ -85,14 +85,6 @@
 </section>
 <div id="particles-js"></div>
 
-<div class="ai-chat">
-  <button onclick="toggleChat()">💬 AI</button>
-  <div id="chatContainer" style="display:none;">
-    <input id="userInput" placeholder="Ask about my experience..." />
-    <button onclick="sendMessage()">Send</button>
-    <div id="chatResponse"></div>
-  </div>
-</div>
 
 <section id="experience" class="section reveal">
   <h2>Experience</h2>
@@ -130,6 +122,28 @@
 </section>
 
 <script src="script.js"></script>
+<!-- AI Floating Button -->
+<div id="ai-widget">
+
+  <div id="ai-button" onclick="toggleChat()">
+    🤖
+  </div>
+
+  <div id="ai-chat">
+    <div class="ai-header">
+      AI Assistant
+      <span onclick="toggleChat()">✖</span>
+    </div>
+
+    <div id="chatMessages"></div>
+
+    <div class="ai-input">
+      <input id="userInput" placeholder="Ask about Nabaraj..." />
+      <button onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+
+</div>
 
 </body>
 </html>

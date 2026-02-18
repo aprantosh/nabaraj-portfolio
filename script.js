@@ -87,3 +87,31 @@ function toggleChat() {
   const chat = document.getElementById("chatContainer");
   chat.style.display = chat.style.display === "none" ? "block" : "none";
 }
+function toggleChat() {
+  const chat = document.getElementById("ai-chat");
+  chat.style.display =
+    chat.style.display === "flex" ? "none" : "flex";
+}
+
+async function sendMessage() {
+  const input = document.getElementById("userInput");
+  const message = input.value.trim();
+  if (!message) return;
+
+  const messages = document.getElementById("chatMessages");
+
+  messages.innerHTML += `<div><strong>You:</strong> ${message}</div>`;
+  input.value = "";
+
+  const response = await fetch("/api/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message })
+  });
+
+  const data = await response.json();
+
+  messages.innerHTML += `<div><strong>AI:</strong> ${data.choices[0].message.content}</div>`;
+
+  messages.scrollTop = messages.scrollHeight;
+}
