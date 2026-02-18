@@ -94,24 +94,34 @@ function toggleChat() {
 }
 
 async function sendMessage() {
-  const input = document.getElementById("userInput");
-  const message = input.value.trim();
-  if (!message) return;
+  try {
+    const input = document.getElementById("userInput");
+    const message = input.value.trim();
+    if (!message) return;
 
-  const messages = document.getElementById("chatMessages");
+    const messages = document.getElementById("chatMessages");
 
-  messages.innerHTML += `<div><strong>You:</strong> ${message}</div>`;
-  input.value = "";
+    messages.innerHTML += `<div><strong>You:</strong> ${message}</div>`;
+    input.value = "";
 
-  const response = await fetch("/api/chat", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ message })
-  });
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message })
+    });
 
-  const data = await response.json();
+    if (!response.ok) {
+      throw new Error("Server error");
+    }
 
-  messages.innerHTML += `<div><strong>AI:</strong> ${data.choices[0].message.content}</div>`;
+    const data = await response.json();
 
-  messages.scrollTop = messages.scrollHeight;
+    messages.innerHTML += `<div><strong>AI:</strong> ${data.choices[0].message.content}</div>`;
+
+    messages.scrollTop = messages.scrollHeight;
+
+  } catch (error) {
+    document.getElementById("chatMessages").innerHTML += 
+      `<div style="color:red;">Error connecting to AI</div>`;
+  }
 }
