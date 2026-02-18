@@ -123,27 +123,16 @@
 
 <script src="script.js"></script>
 <!-- AI Floating Button -->
-<div id="ai-widget">
+<div id="chat-toggle">🤖</div>
 
-  <div id="ai-button" onclick="toggleChat()">
-    🤖
+<div id="chat-container">
+  <div id="chat-messages"></div>
+  <div id="chat-input">
+    <input type="text" id="user-input" placeholder="Ask me anything..." />
+    <button onclick="sendMessage()">Send</button>
   </div>
-
-  <div id="ai-chat">
-    <div class="ai-header">
-      AI Assistant
-      <span onclick="toggleChat()">✖</span>
-    </div>
-
-    <div id="chatMessages"></div>
-
-    <div class="ai-input">
-      <input id="userInput" placeholder="Ask about Nabaraj..." />
-      <button onclick="sendMessage()">➤</button>
-    </div>
-  </div>
-
 </div>
+
 
 </body>
 </html>
