@@ -180,24 +180,28 @@ nav a {
   position: fixed;
   bottom: 25px;
   right: 25px;
-  width: 60px;
-  height: 60px;
-  background: #2563eb;
+  width: 75px;              /* Bigger */
+  height: 75px;             /* Bigger */
+  background: linear-gradient(135deg, #2563eb, #1e40af);
   color: white;
-  font-size: 28px;
+  font-size: 36px;          /* Bigger emoji */
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 0 20px rgba(37, 99, 235, 0.6);
+  box-shadow: 0 0 25px rgba(37, 99, 235, 0.8);
   z-index: 9999;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
 #chat-toggle:hover {
-  transform: scale(1.1);
+  transform: scale(1.15);
+  box-shadow: 0 0 40px rgba(37, 99, 235, 1);
 }
+
+
+
 
 #chat-container {
   position: fixed;
@@ -242,4 +246,24 @@ nav a {
   background: #2563eb;
   color: white;
   cursor: pointer;
+}
+/* Pulse animation for AI button */
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(37, 99, 235, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+}
+
+#chat-toggle {
+  animation: pulse 2s infinite;
+}
+
+/* Smooth open animation */
+#chat-container {
+  transition: all 0.3s ease;
+  transform: translateY(20px);
+}
+
+#chat-container[style*="flex"] {
+  transform: translateY(0);
 }
