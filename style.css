@@ -527,3 +527,88 @@ body{
     width: calc(100vw - 30px);
   }
 }
+
+
+
+
+/* =========================
+   Chat UI: bigger + clearer
+========================= */
+
+.chat{
+  width: 380px;              /* bigger */
+  max-width: calc(100vw - 36px);
+  bottom: 96px;
+}
+
+/* more vertical space */
+.chat-messages{
+  height: 320px;             /* bigger messages panel */
+  padding: 12px;
+}
+
+/* header layout */
+.chat-head{
+  padding: 12px 12px;
+}
+
+.chat-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.bot-badge{
+  width: 36px;
+  height: 36px;
+  border-radius: 14px;
+  display:grid;
+  place-items:center;
+  background: rgba(37, 99, 235, 0.18);
+  border: 1px solid rgba(37, 99, 235, 0.35);
+  font-size: 18px;
+}
+
+.chat-status{
+  font-size: 12px;
+  color: rgba(255,255,255,0.70);
+  margin-top: 2px;
+}
+
+/* input row smaller so it doesn't dominate */
+.chat-input{
+  gap: 10px;
+  padding: 10px;
+}
+
+#user-input{
+  padding: 9px 10px;
+  border-radius: 12px;
+  font-size: 14px;           /* smaller */
+  min-height: 40px;          /* controlled height */
+}
+
+#chat-send{
+  padding: 9px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  min-height: 40px;
+}
+
+/* make the placeholder less "big looking" */
+#user-input::placeholder{
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+/* mobile: still big, but fits */
+@media (max-width: 880px){
+  .chat{
+    width: calc(100vw - 30px);
+    right: 15px;
+    bottom: 86px;
+  }
+  .chat-messages{
+    height: 280px;
+  }
+}

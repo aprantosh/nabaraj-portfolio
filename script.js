@@ -204,6 +204,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const userInput = document.getElementById("user-input");
   const chatClose = document.getElementById("chat-close");
   const chatSendBtn = document.getElementById("chat-send");
+  const chatStatus = document.getElementById("chat-status");
+
 
   function addMessage(role, text) {
     if (!chatMessages) return null;
@@ -255,36 +257,45 @@ document.addEventListener("DOMContentLoaded", function () {
     if (chatMessages) addMessage("ai", "Hi! I’m Nabaraj’s assistant. Ask me about his experience, tech stack, or projects.");
   }, 700);
 
-  window.sendMessage = async function () {
-    const message = userInput?.value.trim();
-    if (!message) return;
+ window.sendMessage = async function () {
+  const message = userInput?.value.trim();
+  if (!message) return;
 
-    addMessage("user", message);
-    userInput.value = "";
+  addMessage("user", message);
+  userInput.value = "";
 
-    const aiDiv = document.createElement("div");
-    aiDiv.className = "msg ai";
-    aiDiv.innerHTML = `<strong>AI:</strong> ...`;
-    chatMessages.appendChild(aiDiv);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
+  const aiDiv = document.createElement("div");
+  aiDiv.className = "msg ai";
+  aiDiv.innerHTML = `<strong>AI:</strong> ...`;
+  chatMessages.appendChild(aiDiv);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
 
-    try {
-      const response = await fetch("https://nabaraj-portfolio-ruby.vercel.app/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message })
-      });
+  // ✅ show status while calling API
+  if (chatStatus) chatStatus.textContent = "Typing…";
 
-      if (!response.ok) throw new Error("Server error");
+  try {
+    const response = await fetch("https://nabaraj-portfolio-ruby.vercel.app/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message })
+    });
 
-      const data = await response.json();
-      const reply = data?.reply || "I didn’t get a reply from the server.";
+    if (!response.ok) throw new Error("Server error");
 
-      typeInto(aiDiv, reply, 14);
-    } catch (error) {
-      aiDiv.innerHTML = `<strong>AI:</strong> <span style="color:#ff6b6b;">Error connecting to AI.</span>`;
-    }
-  };
+    const data = await response.json();
+    const reply = data?.reply || "I didn’t get a reply from the server.";
+
+    // ✅ back to online once we got reply
+    if (chatStatus) chatStatus.textContent = "Online";
+
+    typeInto(aiDiv, reply, 14);
+
+  } catch (error) {
+    if (chatStatus) chatStatus.textContent = "Offline";
+    aiDiv.innerHTML = `<strong>AI:</strong> <span style="color:#ff6b6b;">Error connecting to AI.</span>`;
+  }
+};
+
 
   // Enter to send
   if (userInput) {

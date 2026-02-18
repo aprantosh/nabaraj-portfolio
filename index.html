@@ -269,15 +269,22 @@
   <!-- AI Floating Button (keep if you want, but it needs a real backend to be “AI”) -->
   <div id="chat-toggle" aria-label="Open chat" role="button" tabindex="0">🤖</div>
   <div id="chat-container" class="chat" style="display:none;">
-    <div class="chat-head">
+        <div class="chat-head">
+  <div class="chat-title">
+    <span class="bot-badge" aria-hidden="true">🤖</span>
+    <div>
       <strong>Assistant</strong>
-      <button id="chat-close" aria-label="Close chat">✕</button>
-    </div>
-    <div id="chat-messages" class="chat-messages"></div>
-    <div class="chat-input">
-      <input type="text" id="user-input" placeholder="Ask me anything..." />
-      <button id="chat-send">Send</button>
-    </div>
+      <div class="chat-status" id="chat-status">Online</div>
+        </div>
+       </div>
+
+            <button id="chat-close" aria-label="Close chat">✕</button>
+      </div>
+
+
+
+
+
   </div>
 
   <script src="script.js"></script>
