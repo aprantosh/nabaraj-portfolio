@@ -629,3 +629,25 @@ body{
 #chat-container .chat-input{
   flex: 0 0 auto;
 }
+/* === FINAL FIX: keep input visible in chat === */
+#chat-container.chat{
+  display: flex;
+  flex-direction: column;
+  height: 520px;                    /* give chat a real height */
+  max-height: calc(100vh - 140px);  /* fit on screen */
+}
+
+/* critical: allow messages to shrink and scroll */
+#chat-container .chat-messages{
+  flex: 1 1 auto;
+  min-height: 0;     /* ✅ THIS is the magic line */
+  overflow: auto;
+  height: auto;      /* remove “fixed height” behavior */
+}
+
+/* keep input always visible */
+#chat-container .chat-input{
+  flex: 0 0 auto;
+  border-top: 1px solid var(--stroke);
+  background: rgba(7,11,20,0.96);
+}
