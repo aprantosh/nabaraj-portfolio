@@ -237,6 +237,14 @@ document.addEventListener("DOMContentLoaded", function () {
     if (next && userInput) userInput.focus();
   }
 
+  // auto open once after page loads (remove later if you want)
+  // Auto-open once after page loads (remove later if you want)
+
+  if (!localStorage.getItem("chat_auto_opened")) {
+  setTimeout(() => toggleChat(true), 1200);
+  localStorage.setItem("chat_auto_opened", "1");
+}
+
   if (chatToggle) {
     chatToggle.onclick = () => toggleChat();
     // keyboard accessibility
