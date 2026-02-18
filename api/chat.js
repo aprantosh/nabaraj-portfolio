@@ -2,6 +2,10 @@ export default async function handler(req, res) {
   try {
     const { message } = req.body;
 
+    if (!message) {
+      return res.status(400).json({ error: "Message required" });
+    }
+
     const recruiterKeywords = [
       "interview",
       "hiring",
@@ -18,8 +22,8 @@ export default async function handler(req, res) {
     );
 
     const systemPrompt = isRecruiter
-      ? "You are Nabaraj's AI speaking to a recruiter. Focus on architecture, leadership and business impact."
-      : "You are Nabaraj's AI assistant. Be professional and helpful.";
+      ? "You are Nabaraj's AI speaking to a recruiter. Focus on architecture, leadership, scalability, and business impact."
+      : "You are Nabaraj's AI assistant. Be professional, concise, and helpful.";
 
     const response = await fetch(
       "https://api.groq.com/openai/v1/chat/completions",
@@ -27,11 +31,10 @@ export default async function handler(req, res) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.GROQ_API_KEY}`
+          "Authorization": `Bearer ${process.env.GROQ_API_KEY}`
         },
         body: JSON.stringify({
           model: "llama-3.1-8b-instant",
-          stream: true,
           messages: [
             { role: "system", content: systemPrompt },
             { role: "user", content: message }
@@ -40,15 +43,19 @@ export default async function handler(req, res) {
       }
     );
 
-    res.setHeader("Content-Type", "text/plain");
+    const data = await response.json();
 
-    for await (const chunk of response.body) {
-      res.write(chunk);
+    if (!data.choices) {
+      console.error(data);
+      return res.status(500).json({ error: "Invalid AI response" });
     }
 
-    res.end();
+    res.status(200).json({
+      reply: data.choices[0].message.content
+    });
 
   } catch (error) {
-    res.status(500).json({ error: "Streaming error" });
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
   }
 }
