@@ -18,7 +18,7 @@
 
 <body>
 
-
+<div id="particles-js"></div>
 
 <!-- NAVBAR -->
 <nav>
@@ -83,7 +83,7 @@
   </div>
 
 </section>
-<div id="particles-js"></div>
+
 
 
 <section id="experience" class="section reveal">
@@ -107,12 +107,14 @@
     </div>
 
   </div>
-
+</section>
 
 
 <!-- PROJECTS -->
 <section id="projects" class="section reveal">
   <h2>Projects</h2>
+  <div id="github-projects"></div>
+
 
   <div class="card">
     <h3>Enterprise Microservices Platform</h3>
@@ -123,11 +125,13 @@
 
 <script src="script.js"></script>
 <!-- AI Floating Button -->
+
 <div id="chat-toggle">🤖</div>
 
-<div id="chat-container">
+<div id="chat-container" style="display:none;">
   <div id="chat-messages"></div>
-  <div id="chat-input">
+
+  <div>
     <input type="text" id="user-input" placeholder="Ask me anything..." />
     <button onclick="sendMessage()">Send</button>
   </div>

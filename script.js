@@ -1,17 +1,24 @@
-// Typing Effect
-const text = ["Java • Spring Boot • Kafka", 
-              "Cloud • Microservices • AWS",
-              "Enterprise Backend Engineer"];
+document.addEventListener("DOMContentLoaded", function () {
 
-let i = 0;
-let j = 0;
-let currentText = "";
-let isDeleting = false;
+  /* ========================= */
+  /* Typing Effect */
+  /* ========================= */
 
-function type() {
-  const typingElement = document.querySelector(".typing");
+  const text = [
+    "Java • Spring Boot • Kafka",
+    "Cloud • Microservices • AWS",
+    "Enterprise Backend Engineer"
+  ];
 
-  if (i < text.length) {
+  let i = 0;
+  let j = 0;
+  let currentText = "";
+  let isDeleting = false;
+
+  function type() {
+    const typingElement = document.querySelector(".typing");
+    if (!typingElement) return;
+
     if (!isDeleting && j <= text[i].length) {
       currentText = text[i].substring(0, j++);
     } else if (isDeleting && j >= 0) {
@@ -25,103 +32,115 @@ function type() {
       isDeleting = false;
       i = (i + 1) % text.length;
     }
+
+    setTimeout(type, 100);
   }
 
-  setTimeout(type, 100);
-}
+  type();
 
-type();
 
-// Scroll Reveal
-window.addEventListener("scroll", function () {
-  document.querySelectorAll(".reveal").forEach(el => {
-    const windowHeight = window.innerHeight;
-    const elementTop = el.getBoundingClientRect().top;
-    if (elementTop < windowHeight - 100) {
-      el.classList.add("active");
-    }
-  });
-});
+  /* ========================= */
+  /* Scroll Reveal */
+  /* ========================= */
 
-// Particles
-particlesJS("particles-js", {
-  particles: {
-    number: { value: 80 },
-    size: { value: 3 },
-    move: { speed: 1 },
-    line_linked: { enable: true }
-  }
-});
-fetch("https://api.github.com/users/aprantosh/repos")
-  .then(response => response.json())
-  .then(data => {
-    const container = document.getElementById("github-projects");
-    data.slice(0, 4).forEach(repo => {
-      const div = document.createElement("div");
-      div.classList.add("card");
-      div.innerHTML = `
-        <h3>${repo.name}</h3>
-        <p>${repo.description || "No description available"}</p>
-        <a href="${repo.html_url}" target="_blank">View Repository</a>
-      `;
-      container.appendChild(div);
+  window.addEventListener("scroll", function () {
+    document.querySelectorAll(".reveal").forEach(el => {
+      const windowHeight = window.innerHeight;
+      const elementTop = el.getBoundingClientRect().top;
+      if (elementTop < windowHeight - 100) {
+        el.classList.add("active");
+      }
     });
   });
-async function sendMessage() {
-  const input = document.getElementById("userInput").value;
 
-  const response = await fetch("/api/chat", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ message: input })
-  });
 
-  const data = await response.json();
+  /* ========================= */
+  /* Particles */
+  /* ========================= */
 
-  document.getElementById("chatResponse").innerText =
-    data.choices[0].message.content;
-}
-function toggleChat() {
-  const chat = document.getElementById("chatContainer");
-  chat.style.display = chat.style.display === "none" ? "block" : "none";
-}
-function toggleChat() {
-  const chat = document.getElementById("ai-chat");
-  chat.style.display =
-    chat.style.display === "flex" ? "none" : "flex";
-}
+  if (typeof particlesJS !== "undefined") {
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 80 },
+        size: { value: 3 },
+        move: { speed: 1 },
+        line_linked: { enable: true }
+      }
+    });
+  }
 
-async function sendMessage() {
-  try {
-    const input = document.getElementById("userInput");
-    const message = input.value.trim();
+
+  /* ========================= */
+  /* GitHub Projects */
+  /* ========================= */
+
+  const githubContainer = document.getElementById("github-projects");
+
+  if (githubContainer) {
+    fetch("https://api.github.com/users/aprantosh/repos")
+      .then(response => response.json())
+      .then(data => {
+        data.slice(0, 4).forEach(repo => {
+          const div = document.createElement("div");
+          div.classList.add("card");
+          div.innerHTML = `
+            <h3>${repo.name}</h3>
+            <p>${repo.description || "No description available"}</p>
+            <a href="${repo.html_url}" target="_blank">View Repository</a>
+          `;
+          githubContainer.appendChild(div);
+        });
+      });
+  }
+
+
+  /* ========================= */
+  /* AI Chat System */
+  /* ========================= */
+
+  const chatToggle = document.getElementById("chat-toggle");
+  const chatContainer = document.getElementById("chat-container");
+  const chatMessages = document.getElementById("chat-messages");
+  const userInput = document.getElementById("user-input");
+
+  if (chatToggle) {
+    chatToggle.onclick = () => {
+      chatContainer.style.display =
+        chatContainer.style.display === "flex" ? "none" : "flex";
+    };
+  }
+
+  window.sendMessage = async function () {
+    const message = userInput.value.trim();
     if (!message) return;
 
-    const messages = document.getElementById("chatMessages");
+    chatMessages.innerHTML += `<div><strong>You:</strong> ${message}</div>`;
+    userInput.value = "";
 
-    messages.innerHTML += `<div><strong>You:</strong> ${message}</div>`;
-    input.value = "";
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message })
+      });
 
-    const response = await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message })
-    });
+      if (!response.ok) {
+        throw new Error("Server error");
+      }
 
-    if (!response.ok) {
-      throw new Error("Server error");
+      const data = await response.json();
+
+      chatMessages.innerHTML += `
+        <div><strong>AI:</strong> ${data.reply}</div>
+      `;
+
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    } catch (error) {
+      chatMessages.innerHTML += `
+        <div style="color:red;">Error connecting to AI</div>
+      `;
     }
+  };
 
-    const data = await response.json();
-
-    messages.innerHTML += `<div><strong>AI:</strong> ${data.choices[0].message.content}</div>`;
-
-    messages.scrollTop = messages.scrollHeight;
-
-  } catch (error) {
-    document.getElementById("chatMessages").innerHTML += 
-      `<div style="color:red;">Error connecting to AI</div>`;
-  }
-}
+});
