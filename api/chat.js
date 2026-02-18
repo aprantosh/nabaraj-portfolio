@@ -2,6 +2,10 @@ export default async function handler(req, res) {
   try {
     const { message } = req.body;
 
+    if (!process.env.GROQ_API_KEY) {
+      return res.status(500).json({ error: "Missing API key" });
+    }
+
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -13,7 +17,7 @@ export default async function handler(req, res) {
         messages: [
           {
             role: "system",
-            content: "You are Nabaraj Kandel's AI assistant. Be professional and helpful."
+            content: "You are Nabaraj Kandel's professional AI assistant. Answer clearly and professionally."
           },
           {
             role: "user",
@@ -24,6 +28,11 @@ export default async function handler(req, res) {
     });
 
     const data = await response.json();
+
+    if (!data.choices) {
+      console.error(data);
+      return res.status(500).json({ error: "Invalid response from Groq" });
+    }
 
     res.status(200).json({
       reply: data.choices[0].message.content
