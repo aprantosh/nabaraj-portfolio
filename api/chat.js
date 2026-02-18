@@ -2,53 +2,47 @@ export default async function handler(req, res) {
   try {
     const { message } = req.body;
 
-    if (!message) {
-      return res.status(400).json({ error: "Message required" });
-    }
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${process.env.GROQ_API_KEY}`
+      },
+      body: JSON.stringify({
+        model: "llama-3.1-8b-instant",
+        messages: [
+  {
+    role: "system",
+    content: `
+You are Nabaraj Kandel's AI assistant.
 
-    const recruiterKeywords = [
-      "interview",
-      "hiring",
-      "recruiter",
-      "salary",
-      "role",
-      "position",
-      "team",
-      "leadership"
-    ];
+About Nabaraj:
+- Senior Software Engineer with 7+ years experience
+- Specializes in Java, Spring Boot, Kafka, Microservices
+- Experience at Wells Fargo, Visa, Ondas Networks
+- Cloud expertise: AWS, OpenShift, Docker, Kubernetes
+- Focused on enterprise backend systems, OAuth2 security, CI/CD
+- Open to Senior and Staff Software Engineer roles
 
-    const isRecruiter = recruiterKeywords.some(keyword =>
-      message.toLowerCase().includes(keyword)
-    );
+When recruiters ask questions:
+- Answer professionally
+- Highlight impact and architecture experience
+- Be confident but concise
 
-    const systemPrompt = isRecruiter
-      ? "You are Nabaraj's AI speaking to a recruiter. Focus on architecture, leadership, scalability, and business impact."
-      : "You are Nabaraj's AI assistant. Be professional, concise, and helpful.";
+When casual visitors ask questions:
+- Be friendly and helpful
+`
+  },
+  {
+    role: "user",
+    content: message
+  }
+]
 
-    const response = await fetch(
-      "https://api.groq.com/openai/v1/chat/completions",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${process.env.GROQ_API_KEY}`
-        },
-        body: JSON.stringify({
-          model: "llama-3.1-8b-instant",
-          messages: [
-            { role: "system", content: systemPrompt },
-            { role: "user", content: message }
-          ]
-        })
-      }
-    );
+      })
+    });
 
     const data = await response.json();
-
-    if (!data.choices) {
-      console.error(data);
-      return res.status(500).json({ error: "Invalid AI response" });
-    }
 
     res.status(200).json({
       reply: data.choices[0].message.content
@@ -56,6 +50,6 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Error connecting to AI" });
   }
 }

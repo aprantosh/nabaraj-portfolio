@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  /* ===================================== */
-  /* HERO TYPING EFFECT */
-  /* ===================================== */
+  /* ========================= */
+  /* Typing Effect */
+  /* ========================= */
 
   const text = [
     "Java • Spring Boot • Kafka",
@@ -39,15 +39,14 @@ document.addEventListener("DOMContentLoaded", function () {
   type();
 
 
-  /* ===================================== */
-  /* SCROLL REVEAL */
-  /* ===================================== */
+  /* ========================= */
+  /* Scroll Reveal */
+  /* ========================= */
 
   window.addEventListener("scroll", function () {
     document.querySelectorAll(".reveal").forEach(el => {
       const windowHeight = window.innerHeight;
       const elementTop = el.getBoundingClientRect().top;
-
       if (elementTop < windowHeight - 100) {
         el.classList.add("active");
       }
@@ -55,9 +54,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
-  /* ===================================== */
-  /* PARTICLES */
-  /* ===================================== */
+  /* ========================= */
+  /* Particles */
+  /* ========================= */
 
   if (typeof particlesJS !== "undefined") {
     particlesJS("particles-js", {
@@ -71,9 +70,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  /* ===================================== */
-  /* GITHUB PROJECT AUTO LOAD */
-  /* ===================================== */
+  /* ========================= */
+  /* GitHub Projects */
+  /* ========================= */
 
   const githubContainer = document.getElementById("github-projects");
 
@@ -91,53 +90,48 @@ document.addEventListener("DOMContentLoaded", function () {
           `;
           githubContainer.appendChild(div);
         });
-      })
-      .catch(err => console.log("GitHub load error"));
+      });
   }
 
 
-  /* ===================================== */
-  /* AI CHAT SYSTEM */
-  /* ===================================== */
+  /* ========================= */
+  /* AI Chat System */
+  /* ========================= */
 
   const chatToggle = document.getElementById("chat-toggle");
   const chatContainer = document.getElementById("chat-container");
   const chatMessages = document.getElementById("chat-messages");
   const userInput = document.getElementById("user-input");
 
-  if (!chatToggle || !chatContainer || !chatMessages || !userInput) return;
+  if (chatToggle) {
+    chatToggle.onclick = () => {
+      chatContainer.style.display =
+        chatContainer.style.display === "flex" ? "none" : "flex";
+    };
+  }
 
-  /* Toggle Chat */
-  chatToggle.onclick = () => {
-    chatContainer.style.display =
-      chatContainer.style.display === "flex" ? "none" : "flex";
-  };
-
-  /* Enter Key Support */
-  userInput.addEventListener("keypress", function (e) {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      sendMessage();
-    }
-  });
-
-  /* Send Message */
   window.sendMessage = async function () {
-
     const message = userInput.value.trim();
     if (!message) return;
 
-    chatMessages.innerHTML += `
-      <div><strong>You:</strong> ${message}</div>
-    `;
+    const aiDiv = document.createElement("div");
+aiDiv.innerHTML = "<strong>AI:</strong> ";
+chatMessages.appendChild(aiDiv);
+
+let index = 0;
+const reply = data.reply;
+
+function typeAI() {
+  if (index < reply.length) {
+    aiDiv.innerHTML += reply.charAt(index);
+    index++;
+    setTimeout(typeAI, 20);
+  }
+}
+
+typeAI();
 
     userInput.value = "";
-
-    /* Thinking animation */
-    const thinkingDiv = document.createElement("div");
-    thinkingDiv.innerHTML = "<strong>AI:</strong> <span class='dots'>...</span>";
-    chatMessages.appendChild(thinkingDiv);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
 
     try {
       const response = await fetch("/api/chat", {
@@ -146,46 +140,28 @@ document.addEventListener("DOMContentLoaded", function () {
         body: JSON.stringify({ message })
       });
 
-      if (!response.ok) throw new Error("Server error");
+      if (!response.ok) {
+        throw new Error("Server error");
+      }
 
       const data = await response.json();
 
-      /* Remove thinking dots */
-      thinkingDiv.remove();
-
-      /* Create AI message with typing effect */
-      const aiDiv = document.createElement("div");
-      aiDiv.innerHTML = "<strong>AI:</strong> ";
-      chatMessages.appendChild(aiDiv);
-
-      let index = 0;
-      const reply = data.reply;
-
-      function typeAI() {
-        if (index < reply.length) {
-          aiDiv.innerHTML += reply.charAt(index);
-          index++;
-          setTimeout(typeAI, 15);
-        }
-      }
-
-      typeAI();
+      chatMessages.innerHTML += `
+        <div><strong>AI:</strong> ${data.reply}</div>
+      `;
 
       chatMessages.scrollTop = chatMessages.scrollHeight;
 
     } catch (error) {
-      thinkingDiv.remove();
       chatMessages.innerHTML += `
         <div style="color:red;">Error connecting to AI</div>
       `;
     }
   };
-
-  /* Auto Greeting */
-  setTimeout(() => {
-    chatMessages.innerHTML += `
-      <div><strong>AI:</strong> Hi! I'm Nabaraj's AI assistant. Ask me about his experience, tech stack, or leadership projects.</div>
-    `;
-  }, 1200);
+setTimeout(() => {
+  chatMessages.innerHTML += `
+    <div><strong>AI:</strong> Hi! I'm Nabaraj's AI assistant. Ask me about his experience, projects, or tech stack.</div>
+  `;
+}, 1500);
 
 });
