@@ -83,3 +83,7 @@ async function sendMessage() {
   document.getElementById("chatResponse").innerText =
     data.choices[0].message.content;
 }
+function toggleChat() {
+  const chat = document.getElementById("chatContainer");
+  chat.style.display = chat.style.display === "none" ? "block" : "none";
+}

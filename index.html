@@ -84,11 +84,14 @@
 
 </section>
 <div id="particles-js"></div>
+
 <div class="ai-chat">
-  <h2>Ask My AI Assistant</h2>
-  <input id="userInput" placeholder="Ask about my experience..." />
-  <button onclick="sendMessage()">Send</button>
-  <div id="chatResponse"></div>
+  <button onclick="toggleChat()">💬 AI</button>
+  <div id="chatContainer" style="display:none;">
+    <input id="userInput" placeholder="Ask about my experience..." />
+    <button onclick="sendMessage()">Send</button>
+    <div id="chatResponse"></div>
+  </div>
 </div>
 
 <section id="experience" class="section reveal">

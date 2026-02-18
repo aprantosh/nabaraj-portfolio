@@ -172,3 +172,26 @@ nav a {
   background: #2563eb;
   border-radius: 50%;
 }
+.ai-chat {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 300px;
+  background: rgba(0,0,0,0.8);
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  z-index: 999;
+}
+
+.ai-chat input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
+}
+
+.ai-chat button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 8px;
+}
