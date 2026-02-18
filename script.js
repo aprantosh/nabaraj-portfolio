@@ -43,6 +43,38 @@ document.addEventListener("DOMContentLoaded", function () {
   type();
 
 
+
+/* =========================
+   Show Phone (click-to-reveal)
+========================= */
+
+const showPhoneBtn = document.getElementById("showPhoneBtn");
+const phoneLink = document.getElementById("phoneLink");
+
+// ✅ set the phone number here
+const PHONE_DISPLAY = "(510) 600-3498";
+const PHONE_TEL = "+15106003498";
+
+if (showPhoneBtn && phoneLink) {
+  showPhoneBtn.addEventListener("click", () => {
+    // reveal clickable tel link
+    phoneLink.href = `tel:${PHONE_TEL}`;
+    phoneLink.textContent = PHONE_DISPLAY;
+    phoneLink.style.display = "inline-flex";
+
+    // change button to "Hide Phone"
+    showPhoneBtn.textContent = "Hide Phone";
+
+    // toggle hide/show
+    showPhoneBtn.onclick = () => {
+      const isHidden = phoneLink.style.display === "none";
+      phoneLink.style.display = isHidden ? "inline-flex" : "none";
+      showPhoneBtn.textContent = isHidden ? "Hide Phone" : "Show Phone";
+    };
+  });
+}
+
+
   /* =========================
      Mobile Nav Toggle
   ========================= */
@@ -161,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const copyStatus = document.getElementById("copyStatus");
 
   // ✅ Put the correct email here (double-check spelling before publishing)
-  const EMAIL = "nabarajkan@gmail.com";
+  const EMAIL = "nabarajkandel73@gmail.com";
 
   if (copyBtn) {
     copyBtn.addEventListener("click", async () => {
@@ -313,3 +345,4 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 });
+
