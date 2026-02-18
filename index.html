@@ -1,142 +1,285 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nabaraj Kandel | Senior Software Engineer</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nabaraj Kandel | Senior Software Engineer</title>
+  <meta name="description" content="Senior Java Software Engineer specializing in Spring Boot microservices, cloud (AWS), containers, CI/CD, and event-driven systems." />
+  <meta name="theme-color" content="#0b1220" />
 
-<link rel="stylesheet" href="style.css">
-<link rel="icon" href="favicon.ico">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Nabaraj Kandel | Senior Software Engineer" />
+  <meta property="og:description" content="Java • Spring Boot • Microservices • AWS • Kafka • Docker • Kubernetes" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="profile.jpg" />
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-<!-- Particles JS -->
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Devicons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Particles JS -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+  <!-- Simple JSON-LD (SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Nabaraj Kandel",
+    "jobTitle": "Senior Software Engineer",
+    "knowsAbout": ["Java", "Spring Boot", "Microservices", "AWS", "Kafka", "Docker", "Kubernetes", "CI/CD"]
+  }
+  </script>
 </head>
 
 <body>
+  <a class="skip-link" href="#about">Skip to content</a>
+  <div id="particles-js" aria-hidden="true"></div>
 
-<div id="particles-js"></div>
+  <!-- NAVBAR -->
+  <header class="site-header">
+    <nav class="nav">
+      <div class="logo" aria-label="Home">NK</div>
 
-<!-- NAVBAR -->
-<nav>
-  <div class="logo">NK</div>
-  <ul>
-    <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="resume.pdf" download>Resume</a></li>
-  </ul>
-</nav>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
 
-<!-- HERO -->
-<section class="hero">
-  <img src="profile.jpg" alt="Nabaraj Kandel" class="profile-pic">
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#highlights">Highlights</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a class="btn btn-small" href="resume.pdf" download>Resume</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <h1>Nabaraj Kandel</h1>
-  <h2 class="typing"></h2>
+  <!-- HERO -->
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <img src="profile.jpg" alt="Portrait of Nabaraj Kandel" class="profile-pic" />
 
-  <div class="buttons">
-    <a href="#experience">View Experience</a>
-    <a href="resume.pdf" download>Download Resume</a>
-  </div>
-</section>
+        <div class="hero-text">
+          <h1>Nabaraj Kandel</h1>
+          <p class="subtitle typing" aria-live="polite"></p>
 
-<!-- ABOUT -->
-<section id="about" class="section reveal">
-  <h2>About Me</h2>
-  <p>
-    Senior Software Engineer with 7+ years of experience building enterprise-scale 
-    microservices systems across banking and cloud platforms.
-  </p>
-</section>
-<section class="section reveal">
-  <h2>Tech Stack</h2>
+          <div class="pill-row" aria-label="Key focus areas">
+            <span class="pill">Java / Spring Boot</span>
+            <span class="pill">Microservices</span>
+            <span class="pill">AWS</span>
+            <span class="pill">Kafka</span>
+            <span class="pill">CI/CD</span>
+          </div>
 
-  <div class="tech-icons">
-    <i class="devicon-java-plain colored"></i>
-    <i class="devicon-spring-plain colored"></i>
-    <i class="devicon-amazonwebservices-original colored"></i>
-    <i class="devicon-docker-plain colored"></i>
-    <i class="devicon-kubernetes-plain colored"></i>
-    <i class="devicon-postgresql-plain colored"></i>
-    <i class="devicon-git-plain colored"></i>
-  </div>
-</section><section class="section reveal">
-  <h2>Skills</h2>
+          <div class="buttons">
+            <a class="btn" href="#experience">View Experience</a>
+            <a class="btn btn-ghost" href="resume.pdf" download>Download Resume</a>
+          </div>
 
-  <div class="skill">
-    <p>Java / Spring Boot</p>
-    <div class="bar"><div class="progress java"></div></div>
-  </div>
+          <div class="mini-stats">
+            <div class="stat">
+              <div class="stat-num">7+</div>
+              <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">Microservices</div>
+              <div class="stat-label">Enterprise Systems</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">Cloud + DevOps</div>
+              <div class="stat-label">AWS / Docker / K8s</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <div class="skill">
-    <p>Microservices Architecture</p>
-    <div class="bar"><div class="progress micro"></div></div>
-  </div>
+    <!-- ABOUT -->
+    <section id="about" class="section reveal">
+      <h2>About</h2>
+      <p>
+        Senior Java Software Engineer with 7 years of experience designing and deploying enterprise applications,
+        specializing in Spring Boot microservices, cloud computing, containerization, event-driven systems, and CI/CD.
+      </p>
+      <p class="muted">
+        Strong Agile/DevOps background and experience mentoring and collaborating across cross-functional teams.
+      </p>
+    </section>
 
-  <div class="skill">
-    <p>AWS & Cloud</p>
-    <div class="bar"><div class="progress aws"></div></div>
-  </div>
+    <!-- HIGHLIGHTS -->
+    <section id="highlights" class="section reveal">
+      <h2>Highlights</h2>
+      <div class="grid-3">
+        <div class="card">
+          <h3>API Gateway / Proxy Work</h3>
+          <p>OAuth 2.0 scope validation, OpenAPI 3.0 specs, SIT/UAT testing, and platform migration support.</p>
+        </div>
+        <div class="card">
+          <h3>Event-Driven Systems</h3>
+          <p>Kafka/RabbitMQ integrations for async workflows, publishing events across services.</p>
+        </div>
+        <div class="card">
+          <h3>Cloud + Automation</h3>
+          <p>CI/CD pipelines, container platforms, logging/monitoring (ELK, Prometheus/Grafana, Splunk).</p>
+        </div>
+      </div>
+    </section>
 
-</section>
+    <!-- SKILLS -->
+    <section id="skills" class="section reveal">
+      <h2>Tech Stack</h2>
+      <div class="tech-icons" aria-label="Technology icons">
+        <i class="devicon-java-plain colored" title="Java"></i>
+        <i class="devicon-spring-plain colored" title="Spring"></i>
+        <i class="devicon-amazonwebservices-original colored" title="AWS"></i>
+        <i class="devicon-docker-plain colored" title="Docker"></i>
+        <i class="devicon-kubernetes-plain colored" title="Kubernetes"></i>
+        <i class="devicon-postgresql-plain colored" title="PostgreSQL"></i>
+        <i class="devicon-git-plain colored" title="Git"></i>
+        <i class="devicon-react-original colored" title="React"></i>
+      </div>
 
+      <h3 class="subhead">Core Skills</h3>
+      <div class="chips">
+        <span class="chip">Java</span>
+        <span class="chip">Spring Boot</span>
+        <span class="chip">Spring Cloud</span>
+        <span class="chip">Microservices</span>
+        <span class="chip">REST APIs</span>
+        <span class="chip">GraphQL</span>
+        <span class="chip">Kafka</span>
+        <span class="chip">RabbitMQ</span>
+        <span class="chip">Docker</span>
+        <span class="chip">Kubernetes</span>
+        <span class="chip">Jenkins</span>
+        <span class="chip">GitHub Actions</span>
+        <span class="chip">PostgreSQL</span>
+        <span class="chip">MongoDB</span>
+        <span class="chip">JUnit / Mockito</span>
+        <span class="chip">SonarQube</span>
+        <span class="chip">Splunk / ELK</span>
+      </div>
+    </section>
 
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section reveal">
+      <h2>Experience</h2>
 
-<section id="experience" class="section reveal">
-  <h2>Experience</h2>
+      <div class="timeline">
+        <article class="timeline-item">
+          <div class="timeline-head">
+            <h3>Wells Fargo</h3>
+            <p class="muted">Senior Software Developer • Jul 2025 – Present</p>
+          </div>
+          <ul>
+            <li>Built API proxy migration with OAuth 2.0 scope validation and OpenAPI 3.0 design; validated via SIT/UAT using Postman, Splunk, and Apigee Trace.</li>
+            <li>Authored functional specs (FSD) covering routing, OAuth policies, and Kafka event publishing.</li>
+            <li>Supported platform migration from PCF to OpenShift; coordinated decommissioning + redeployment of components.</li>
+            <li>Migrated/optimized Autosys jobs and batch workflows to align with new infra.</li>
+          </ul>
+          <p class="stack">Stack: Java, Spring Boot, Apigee, Jenkins, Autosys, Splunk</p>
+        </article>
 
-  <div class="timeline">
+        <article class="timeline-item">
+          <div class="timeline-head">
+            <h3>Visa</h3>
+            <p class="muted">Senior Software Engineer • Feb 2022 – Jan 2025</p>
+          </div>
+          <ul>
+            <li>Designed and delivered Spring Boot microservices consumed by React frontends; integrated REST + GraphQL services.</li>
+            <li>Implemented event-driven messaging with Kafka and RabbitMQ; improved reliability of async workflows.</li>
+            <li>Created CI/CD automation using Jenkins and GitHub Actions; containerized deployments with Docker/Kubernetes.</li>
+            <li>Improved observability with ELK + Prometheus and supported performance tuning and testing.</li>
+          </ul>
+          <p class="stack">Stack: Java 17, Spring Boot, AWS, Kafka, K8s, ELK, Prometheus</p>
+        </article>
 
-    <div class="timeline-item">
-      <h3>Wells Fargo</h3>
-      <p>Senior Software Engineer | 2025 – Present</p>
+        <article class="timeline-item">
+          <div class="timeline-head">
+            <h3>Ondas Networks</h3>
+            <p class="muted">Java Engineer • Feb 2021 – Feb 2022</p>
+          </div>
+          <ul>
+            <li>Built Java/Spring Boot services and supported high-availability deployments.</li>
+            <li>Developed reactive APIs with Spring WebFlux to handle high concurrency.</li>
+            <li>Worked on authentication/authorization patterns (OAuth2 / SAML) and logging/monitoring improvements.</li>
+          </ul>
+          <p class="stack">Stack: Java, Spring Boot, WebFlux, OpenShift</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section reveal">
+      <h2>Projects</h2>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>Enterprise Microservices Platform</h3>
+          <p class="muted">Java • Spring Boot • Kafka • Docker • Kubernetes</p>
+          <p>Designed REST services, event publishing, CI/CD automation, and observability patterns for production deployments.</p>
+        </div>
+
+        <div class="card">
+          <h3>API Proxy Migration Toolkit</h3>
+          <p class="muted">Apigee • OAuth2 • OpenAPI • Postman</p>
+          <p>Standardized proxy patterns (scope validation, routing, testing) to speed up enterprise API migrations.</p>
+        </div>
+
+        <div class="card">
+          <h3>Cloud Deploy Automation</h3>
+          <p class="muted">AWS • Jenkins • GitHub Actions</p>
+          <p>Automated deployments and environment provisioning with repeatable pipelines and quality gates.</p>
+        </div>
+      </div>
+      <p class="muted tiny">Tip: replace these with real GitHub links/screenshots once you have them.</p>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section reveal">
+      <h2>Contact</h2>
+      <p class="muted">For spam protection, consider a contact form or a “copy email” button instead of displaying phone publicly.</p>
+
+      <div class="contact-box">
+        <button class="btn btn-ghost" id="copyEmailBtn" type="button">
+          Copy Email
+        </button>
+        <a class="btn" href="resume.pdf" download>Download Resume</a>
+      </div>
+      <p class="muted tiny" id="copyStatus" role="status" aria-live="polite"></p>
+    </section>
+
+    <footer class="footer">
+      <p>© <span id="year"></span> Nabaraj Kandel • Built with HTML/CSS/JS</p>
+    </footer>
+  </main>
+
+  <!-- AI Floating Button (keep if you want, but it needs a real backend to be “AI”) -->
+  <div id="chat-toggle" aria-label="Open chat" role="button" tabindex="0">🤖</div>
+  <div id="chat-container" class="chat" style="display:none;">
+    <div class="chat-head">
+      <strong>Assistant</strong>
+      <button id="chat-close" aria-label="Close chat">✕</button>
     </div>
-
-    <div class="timeline-item">
-      <h3>Visa</h3>
-      <p>Senior Software Engineer | 2022 – 2025</p>
+    <div id="chat-messages" class="chat-messages"></div>
+    <div class="chat-input">
+      <input type="text" id="user-input" placeholder="Ask me anything..." />
+      <button id="chat-send">Send</button>
     </div>
-
-    <div class="timeline-item">
-      <h3>Ondas Networks</h3>
-      <p>Java Engineer | 2021 – 2022</p>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- PROJECTS -->
-<section id="projects" class="section reveal">
-  <h2>Projects</h2>
-  
-
-
-  <div class="card">
-    <h3>Enterprise Microservices Platform</h3>
-    <p>Spring Boot • Kafka • AWS</p>
   </div>
 
-</section>
-
-<script src="script.js"></script>
-<!-- AI Floating Button -->
-
-<div id="chat-toggle">🤖</div>
-
-<div id="chat-container" style="display:none;">
-  <div id="chat-messages"></div>
-
-  <div>
-    <input type="text" id="user-input" placeholder="Ask me anything..." />
-    <button onclick="sendMessage()">Send</button>
-  </div>
-</div>
-
-
+  <script src="script.js"></script>
 </body>
 </html>
