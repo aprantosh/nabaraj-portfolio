@@ -67,3 +67,19 @@ fetch("https://api.github.com/users/aprantosh/repos")
       container.appendChild(div);
     });
   });
+async function sendMessage() {
+  const input = document.getElementById("userInput").value;
+
+  const response = await fetch("/api/chat", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ message: input })
+  });
+
+  const data = await response.json();
+
+  document.getElementById("chatResponse").innerText =
+    data.choices[0].message.content;
+}
